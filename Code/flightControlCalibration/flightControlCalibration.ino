@@ -167,7 +167,7 @@ void setup() {
   //if (!baro.begin()) {
     Serial.println("Could not find sensor. Check wiring.");
     while(1);
-  }
+  
 
   // use to set sea level pressure for current location
   // this is needed for accurate altitude measurement
