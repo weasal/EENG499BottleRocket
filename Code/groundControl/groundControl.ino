@@ -22,6 +22,7 @@ float altitude;
 float acceleration;
 float timeFromLaunch=0;
 bool deployRec;//Create variable to see if recovery measure should be deployed based on if pin 16 is high
+bool resetToZero;//Boolean to check to set launch altitude to zero.
 
 //Creation of structure for reception of data
 typedef struct struct_message {
@@ -104,6 +105,7 @@ void loop()
   //File dataLog = SPIFFS.open("/data.csv", "w");
   //Check if the switch to deploy recovery measures is toggled
   deployRec = digitalRead(16);
+  resetToZero= digitalRead(17);
     // Send message via ESP-NOW
   esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &deployRec, sizeof(deployRec));//Send the value of deployRec
   if (result == ESP_OK)

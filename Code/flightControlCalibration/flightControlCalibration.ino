@@ -2,6 +2,7 @@
 #include <esp_now.h>//For ESP-NOW protocol
 #include <WiFi.h>//For Wifi Communication
 #include <Wire.h>//I2C library
+#include <ESP32Servo.h> 
 //Sensor libraries
 #include <Adafruit_LIS3DH.h>
 #include <Adafruit_Sensor.h>
@@ -15,6 +16,7 @@
 //Sensor Assignment
 Adafruit_LIS3DH lis = Adafruit_LIS3DH();
 MPL3115A2 baro3115;
+Servo recovery;
 esp_now_peer_info_t peerInfo;
 const int WAIT_TIME = 50;
 // REPLACE WITH THE MAC Address of your receiver 
@@ -147,7 +149,6 @@ void doCalibration()
 void setup() {
   // Initialize Serial Monitor
   Serial.begin(115200);
-  
   pinMode(16,OUTPUT);
 
   Serial.println("Adafruit_MPL3115A2 test!");
@@ -165,9 +166,9 @@ void setup() {
   Serial.print("Range = "); Serial.print(2 << lis.getRange());
   Serial.println("G");
   //if (!baro.begin()) {
-    Serial.println("Could not find sensor. Check wiring.");
-    while(1);
-  
+   // Serial.println("Could not find sensor. Check wiring.");
+    //while(1);
+  recovery.attach(16);
 
   // use to set sea level pressure for current location
   // this is needed for accurate altitude measurement
@@ -203,12 +204,12 @@ void setup() {
 void loop() {
   if (deployRec==1)
 {
-  digitalWrite(16, HIGH);//Set pin 13 high to allow for recovery measures to be deployed
+  recovery.write(90);//Set pin 13 high to allow for recovery measures to be deployed
   Serial.println("Deploying");
 }
 else
 {
-  digitalWrite(16,LOW);//Set pin 13 low to turn off LED
+  recovery.write(180);//Set pin 13 low to turn off LED
 }
 baro3115.setModeStandby();
 baro3115.setModeBarometer();
