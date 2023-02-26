@@ -12,7 +12,7 @@
 #define I2C_SCL 22
 //Define Altitude Basis; Set for Topographic Map Altitude for Emmanuel Hill
 #define ALTBASIS 407
-#define OVERSAMPLE_RATE 2
+#define OVERSAMPLE_RATE 3
 //Sensor Assignment
 Adafruit_LIS3DH lis = Adafruit_LIS3DH();
 MPL3115A2 baro3115;
@@ -213,7 +213,7 @@ else
 }
 baro3115.setModeStandby();
 baro3115.setModeBarometer();
-baro3115.setOversampleRate(0);
+baro3115.setOversampleRate(OVERSAMPLE_RATE);
 baro3115.enableEventFlags();
 baro3115.setModeActive();
 // when we are using the calibration then we also have to add the
