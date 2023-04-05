@@ -12,7 +12,7 @@
 #define I2C_SCL 22
 //Define Altitude Basis; Set for Topographic Map Altitude for Emmanuel Hill
 #define ALTBASIS 407
-#define OVERSAMPLE_RATE 3
+#define OVERSAMPLE_RATE 4
 //Sensor Assignment
 Adafruit_LIS3DH lis = Adafruit_LIS3DH();
 MPL3115A2 baro3115;
